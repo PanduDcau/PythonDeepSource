@@ -1,0 +1,18 @@
+﻿column name,column description
+url,url of the restaurant 
+address,address of the restaurant
+name,name of the restaurant
+phone,phone number of the restaurant
+location,"location of the restaurant, i.e., where it is located"
+rest_type,"restaurant type, Quick Bites, Casual Dining, Cafe, Delivery, Takeaway, Delivery, Casual Dining, Bar, Bakery"
+cuisines ,"list of food styles, such as South Indian, North Indian, Chinese… each restaurant may offer multiple cuisines"
+menu_item,menus available in the restaurant
+listed_in_type,type of services where the restaurant is listed in 
+listed_in_city,locations where the restaurant is listed in 
+online_order,whether online ordering is available in the restaurant or not
+book_table,whether the table booking option is available or not
+ave_cost_for_two,the approximate cost for meal for two people
+dish_liked,dishes people liked in the restaurant
+votes,the total number of reviews/votes for the restaurant
+ave_review_ranking,average rank in customers' reviews out of 5
+rate,the overall rating of the restaurant out of 5
