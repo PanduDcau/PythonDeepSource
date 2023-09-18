@@ -1,0 +1,407 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<!-- build 20194.19.1211.1636                               -->
+<workbook original-version='18.1' source-build='2019.4.1 (20194.19.1211.1636)' source-platform='win' version='18.1' xmlns:user='http://www.tableausoftware.com/xml/user'>
+  <document-format-change-manifest>
+    <SheetIdentifierTracking ignorable='true' predowngraded='true' />
+    <WindowsPersistSimpleIdentifiers />
+  </document-format-change-manifest>
+  <preferences>
+    <preference name='ui.encoding.shelf.height' value='24' />
+    <preference name='ui.shelf.height' value='26' />
+  </preferences>
+  <datasources>
+    <datasource caption='cholesterol (cholesterol)' inline='true' name='federated.0e1kgj00rkk99s13gct6d14dxwhy' version='18.1'>
+      <connection class='federated'>
+        <named-connections>
+          <named-connection caption='cholesterol' name='excel-direct.0d2fui50kv1emz1364x9j0pk82es'>
+            <connection class='excel-direct' cleaning='no' compat='no' dataRefreshTime='' filename='D:/Flask Project/Metabolism Project/cholesterol/cholesterol.xlsx' interpretationMode='0' password='' server='' validate='no' />
+          </named-connection>
+        </named-connections>
+        <relation connection='excel-direct.0d2fui50kv1emz1364x9j0pk82es' name='cholesterol' table='[cholesterol$]' type='table'>
+          <columns gridOrigin='A1:N298:no:A1:N298:0' header='yes' outcome='6'>
+            <column datatype='integer' name='age' ordinal='0' />
+            <column datatype='integer' name='sex' ordinal='1' />
+            <column datatype='integer' name='cp' ordinal='2' />
+            <column datatype='integer' name='trestbps' ordinal='3' />
+            <column datatype='integer' name='fbs' ordinal='4' />
+            <column datatype='integer' name='restecg' ordinal='5' />
+            <column datatype='integer' name='thalach' ordinal='6' />
+            <column datatype='integer' name='exang' ordinal='7' />
+            <column datatype='real' name='oldpeak' ordinal='8' />
+            <column datatype='integer' name='slope' ordinal='9' />
+            <column datatype='integer' name='ca' ordinal='10' />
+            <column datatype='integer' name='thal' ordinal='11' />
+            <column datatype='integer' name='num' ordinal='12' />
+            <column datatype='integer' name='chol' ordinal='13' />
+          </columns>
+        </relation>
+        <metadata-records>
+          <metadata-record class='column'>
+            <remote-name>age</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[age]</local-name>
+            <parent-name>[cholesterol]</parent-name>
+            <remote-alias>age</remote-alias>
+            <ordinal>0</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;I8&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>sex</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[sex]</local-name>
+            <parent-name>[cholesterol]</parent-name>
+            <remote-alias>sex</remote-alias>
+            <ordinal>1</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;I8&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>cp</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[cp]</local-name>
+            <parent-name>[cholesterol]</parent-name>
+            <remote-alias>cp</remote-alias>
+            <ordinal>2</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;I8&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>trestbps</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[trestbps]</local-name>
+            <parent-name>[cholesterol]</parent-name>
+            <remote-alias>trestbps</remote-alias>
+            <ordinal>3</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;I8&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>fbs</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[fbs]</local-name>
+            <parent-name>[cholesterol]</parent-name>
+            <remote-alias>fbs</remote-alias>
+            <ordinal>4</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;I8&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>restecg</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[restecg]</local-name>
+            <parent-name>[cholesterol]</parent-name>
+            <remote-alias>restecg</remote-alias>
+            <ordinal>5</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;I8&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>thalach</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[thalach]</local-name>
+            <parent-name>[cholesterol]</parent-name>
+            <remote-alias>thalach</remote-alias>
+            <ordinal>6</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;I8&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>exang</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[exang]</local-name>
+            <parent-name>[cholesterol]</parent-name>
+            <remote-alias>exang</remote-alias>
+            <ordinal>7</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;I8&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>oldpeak</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[oldpeak]</local-name>
+            <parent-name>[cholesterol]</parent-name>
+            <remote-alias>oldpeak</remote-alias>
+            <ordinal>8</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>15</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;R8&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>slope</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[slope]</local-name>
+            <parent-name>[cholesterol]</parent-name>
+            <remote-alias>slope</remote-alias>
+            <ordinal>9</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;I8&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>ca</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[ca]</local-name>
+            <parent-name>[cholesterol]</parent-name>
+            <remote-alias>ca</remote-alias>
+            <ordinal>10</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;I8&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>thal</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[thal]</local-name>
+            <parent-name>[cholesterol]</parent-name>
+            <remote-alias>thal</remote-alias>
+            <ordinal>11</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;I8&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>num</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[num]</local-name>
+            <parent-name>[cholesterol]</parent-name>
+            <remote-alias>num</remote-alias>
+            <ordinal>12</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;I8&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>chol</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[chol]</local-name>
+            <parent-name>[cholesterol]</parent-name>
+            <remote-alias>chol</remote-alias>
+            <ordinal>13</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;I8&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='capability'>
+            <remote-name />
+            <remote-type>0</remote-type>
+            <parent-name>[cholesterol]</parent-name>
+            <remote-alias />
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='integer' name='context'>0</attribute>
+              <attribute datatype='string' name='gridOrigin'>&quot;A1:N298:no:A1:N298:0&quot;</attribute>
+              <attribute datatype='boolean' name='header'>true</attribute>
+              <attribute datatype='integer' name='outcome'>6</attribute>
+            </attributes>
+          </metadata-record>
+        </metadata-records>
+      </connection>
+      <aliases enabled='yes' />
+      <column datatype='integer' name='[Number of Records]' role='measure' type='quantitative' user:auto-column='numrec'>
+        <calculation class='tableau' formula='1' />
+      </column>
+      <column caption='Age' datatype='integer' name='[age]' role='measure' type='quantitative' />
+      <column caption='Ca' datatype='integer' name='[ca]' role='measure' type='quantitative' />
+      <column caption='Chol' datatype='integer' name='[chol]' role='measure' type='quantitative' />
+      <column caption='Cp' datatype='integer' name='[cp]' role='measure' type='quantitative' />
+      <column caption='Exang' datatype='integer' name='[exang]' role='measure' type='quantitative' />
+      <column caption='Fbs' datatype='integer' name='[fbs]' role='measure' type='quantitative' />
+      <column caption='Num' datatype='integer' name='[num]' role='dimension' type='ordinal' />
+      <column caption='Oldpeak' datatype='real' name='[oldpeak]' role='measure' type='quantitative' />
+      <column caption='Restecg' datatype='integer' name='[restecg]' role='measure' type='quantitative' />
+      <column caption='Sex' datatype='integer' name='[sex]' role='measure' type='quantitative' />
+      <column caption='Slope' datatype='integer' name='[slope]' role='measure' type='quantitative' />
+      <column caption='Thal' datatype='integer' name='[thal]' role='measure' type='quantitative' />
+      <column caption='Thalach' datatype='integer' name='[thalach]' role='measure' type='quantitative' />
+      <column caption='Trestbps' datatype='integer' name='[trestbps]' role='measure' type='quantitative' />
+      <layout dim-ordering='alphabetic' dim-percentage='0.267857' measure-ordering='alphabetic' measure-percentage='0.732143' show-aliased-fields='true' show-structure='true' />
+      <semantic-values>
+        <semantic-value key='[Country].[Name]' value='&quot;USA&quot;' />
+      </semantic-values>
+    </datasource>
+  </datasources>
+  <worksheets>
+    <worksheet name='Sheet 1'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='cholesterol (cholesterol)' name='federated.0e1kgj00rkk99s13gct6d14dxwhy' />
+          </datasources>
+          <datasource-dependencies datasource='federated.0e1kgj00rkk99s13gct6d14dxwhy'>
+            <column caption='Age' datatype='integer' name='[age]' role='measure' type='quantitative' />
+            <column caption='Chol' datatype='integer' name='[chol]' role='measure' type='quantitative' />
+            <column-instance column='[age]' derivation='Sum' name='[sum:age:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[chol]' derivation='Sum' name='[sum:chol:qk]' pivot='key' type='quantitative' />
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style />
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <encodings>
+              <color column='[federated.0e1kgj00rkk99s13gct6d14dxwhy].[sum:age:qk]' />
+            </encodings>
+          </pane>
+        </panes>
+        <rows>[federated.0e1kgj00rkk99s13gct6d14dxwhy].[sum:age:qk]</rows>
+        <cols>[federated.0e1kgj00rkk99s13gct6d14dxwhy].[sum:chol:qk]</cols>
+      </table>
+      <simple-id uuid='{A30A2F02-3FD1-4D32-8B2B-C7BDF7061080}' />
+    </worksheet>
+  </worksheets>
+  <windows saved-dpi-scale-factor='1.25' source-height='37'>
+    <window class='worksheet' maximized='true' name='Sheet 1'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card pane-specification-id='0' param='[federated.0e1kgj00rkk99s13gct6d14dxwhy].[sum:age:qk]' type='color' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{FCBFA604-C8E8-4B6B-97F3-4842875F3223}' />
+    </window>
+  </windows>
+  <thumbnails>
+    <thumbnail height='192' name='Sheet 1' width='192'>
+      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
+      AAAAAElFTkSuQmCC
+    </thumbnail>
+  </thumbnails>
+</workbook>
