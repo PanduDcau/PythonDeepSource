@@ -1,0 +1,682 @@
+
+---
+title: 'Hepatits C prediction with R and tidymodels'
+output:
+  html_document:
+    number_sections: true
+    df_print: paged
+    toc: true
+    fig_width: 8
+    fig_height: 5
+    theme: cosmo
+    highlight: tango
+    code_folding: hide
+---
+
+# Intro
+
+The aim is to predict development of hepatitis stages:
+
+> The target attribute for classification is Category (2): blood donors vs. Hepatitis C patients (including its progress (just Hepatitis C, Fibrosis, Cirrhosis).
+
+I will join *Cirrhosis*, *Fibrosis* and *Hepatitis C* into one category **Hepatitis**, the other one will be called **Donor**
+
+# Libraries
+                                                                                                  
+```{r, include=FALSE}
+# installaton
+install.packages("probably")       
+```
+
+To see the libraries I am using here, press **Code** button to the right.                                                                                                  
+                                                                                                  
+```{r, message=FALSE, warning=FALSE}
+library(tidymodels)
+library(skimr)
+library(stringr)
+library(themis) # for SMOTE and other recipes for target balancing
+library(vip) # for variable importance
+library(probably) # for balancing performance
+```
+                                                                                                  
+# The data set
+                                                                                                  
+Read and look at the data set:
+
+```{r, message=FALSE}
+df <- readr::read_csv("../input/hepatitis-c-dataset/HepatitisCdata.csv", col_types = "dfdfdddddddddd") %>% select(-...1)
+
+# make re-coded Category variable
+# there is 0=Blood Donor and 0s=suspect Blood Donor
+df <- df %>% 
+  mutate(Diagnosis = if_else(str_detect(Category, "Donor"), "Donor", "Hepatitis")) %>%
+  mutate(Diagnosis = factor(Diagnosis, levels = c("Hepatitis", "Donor"))) %>%
+  relocate(Diagnosis, .before = Category) %>%
+  select(-Category)
+
+df
+```
+
+# Descriptive statistics
+
+## Factor variables
+
+```{r}
+skim(df) %>% yank("factor")
+```
+
+No missing data here, but the target variable is **imbalanced**: 75 positive cases vs 540 negative cases
+
+## Numeric variables
+
+```{r}
+skim(df) %>% yank("numeric")
+```
+
+Numeric variables are mostly complete. I will use imputation later to fill in the gaps
+                                                                                                  
+# EDA
+
+## Pairs plot
+
+```{r pairs, fig.width=14, fig.height=10, warning=FALSE, message=FALSE}
+GGally::ggpairs(df, aes(color = Diagnosis), 
+        upper = list(continuous = GGally::wrap("cor", size = 2.0)),
+        diag = list(continuous = "barDiag"),
+        lower = list(continuous = GGally::wrap("points", alpha = 0.3, size=0.8))) +
+  scale_color_brewer(palette = "Set1", direction = -1) +
+  scale_fill_brewer(palette = "Set1", direction = -1)
+```
+
+## Age v Diagnosis
+
+```{r, warning=FALSE, message=FALSE}
+ggplot(df, aes(Diagnosis, Age)) +
+  geom_violin(aes(fill = Diagnosis), alpha = 0.5) +
+  geom_jitter(alpha = 0.5, size = 0.6) +
+  geom_boxplot(aes(fill = Diagnosis), alpha = 0.2) +
+  scale_fill_brewer(palette = "Set1", direction = -1) +
+  xlab("")
+```
+
+## Age v ALB
+
+```{r, warning=FALSE, message=FALSE}
+ggplot(df, aes(Diagnosis, ALB)) +
+  geom_violin(aes(fill = Diagnosis), alpha = 0.5) +
+  geom_jitter(alpha = 0.5, size = 0.6) +
+  geom_boxplot(aes(fill = Diagnosis), alpha = 0.2) +
+  scale_fill_brewer(palette = "Set1", direction = -1) +
+  xlab("")
+```
+
+## ALP v Diagnosis
+
+```{r, warning=FALSE, message=FALSE}
+ggplot(df, aes(Diagnosis, ALP)) +
+  geom_violin(aes(fill = Diagnosis), alpha = 0.5) +
+  geom_jitter(alpha = 0.5, size = 0.6) +
+  geom_boxplot(aes(fill = Diagnosis), alpha = 0.2) +
+  scale_fill_brewer(palette = "Set1", direction = -1) +
+  xlab("")
+```
+
+## ALT v Diagnosis
+
+```{r, warning=FALSE, message=FALSE}
+ggplot(df, aes(Diagnosis, ALT)) +
+  geom_violin(aes(fill = Diagnosis), alpha = 0.5) +
+  geom_jitter(alpha = 0.5, size = 0.6) +
+  geom_boxplot(aes(fill = Diagnosis), alpha = 0.2) +
+  scale_fill_brewer(palette = "Set1", direction = -1) +
+  coord_trans(y = "sqrt") +
+  xlab("")
+```
+
+## AST v Diagnosis
+
+```{r, warning=FALSE, message=FALSE}
+ggplot(df, aes(Diagnosis, AST)) +
+  geom_violin(aes(fill = Diagnosis), alpha = 0.5) +
+  geom_jitter(alpha = 0.5, size = 0.6) +
+  geom_boxplot(aes(fill = Diagnosis), alpha = 0.2) +
+  scale_fill_brewer(palette = "Set1", direction = -1) +
+  coord_trans(y = "sqrt") +
+  xlab("")
+```
+
+## BIL v Diagnosis
+
+```{r, warning=FALSE, message=FALSE}
+ggplot(df, aes(Diagnosis, BIL)) +
+  geom_violin(aes(fill = Diagnosis), alpha = 0.5) +
+  geom_jitter(alpha = 0.5, size = 0.6) +
+  geom_boxplot(aes(fill = Diagnosis), alpha = 0.2) +
+  scale_fill_brewer(palette = "Set1", direction = -1) +
+  coord_trans(y = "sqrt") +
+  xlab("")
+```
+
+## CHE v Diagnosis
+
+```{r, warning=FALSE, message=FALSE}
+ggplot(df, aes(Diagnosis, CHE)) +
+  geom_violin(aes(fill = Diagnosis), alpha = 0.5) +
+  geom_jitter(alpha = 0.5, size = 0.6) +
+  geom_boxplot(aes(fill = Diagnosis), alpha = 0.2) +
+  scale_fill_brewer(palette = "Set1", direction = -1) +
+  xlab("")
+```
+
+## CHOL v Diagnosis
+
+```{r, warning=FALSE, message=FALSE}
+ggplot(df, aes(Diagnosis, CHOL)) +
+  geom_violin(aes(fill = Diagnosis), alpha = 0.5) +
+  geom_jitter(alpha = 0.5, size = 0.6) +
+  geom_boxplot(aes(fill = Diagnosis), alpha = 0.2) +
+  scale_fill_brewer(palette = "Set1", direction = -1) +
+  xlab("")
+```
+
+## CREA v Diagnosis
+
+```{r, warning=FALSE, message=FALSE}
+ggplot(df, aes(Diagnosis, CREA)) +
+  geom_violin(aes(fill = Diagnosis), alpha = 0.5) +
+  geom_jitter(alpha = 0.2, size = 0.3) +
+  geom_boxplot(aes(fill = Diagnosis), alpha = 0.2) +
+  scale_fill_brewer(palette = "Set1", direction = -1) +
+  coord_trans(y = "sqrt") +
+  xlab("")
+```
+
+## GGT v Diagnosis
+
+```{r, warning=FALSE, message=FALSE}
+ggplot(df, aes(Diagnosis, GGT)) +
+  geom_violin(aes(fill = Diagnosis), alpha = 0.5) +
+  geom_jitter(alpha = 0.5, size = 0.6) +
+  geom_boxplot(aes(fill = Diagnosis), alpha = 0.2) +
+  scale_fill_brewer(palette = "Set1", direction = -1) +
+  coord_trans(y = "sqrt") +
+  xlab("")
+```
+
+Median of most numerical variables are different between `Donor` and `Hepatitis` groups.
+                                                                                                  
+## Sex v Diagnosis
+
+```{r, warning=FALSE, message=FALSE}
+sex_n <- df %>% group_by(Diagnosis, Sex) %>% summarise(N = n())
+
+ggplot(sex_n, aes(Diagnosis, N)) +
+  geom_col(aes(fill = Sex), position = "fill") +
+  scale_fill_brewer(palette = "Set2", direction = -1) +
+  xlab("") +
+  ylab("Proportion")
+```
+
+Difference in proportion of each sex is not that big between `Donor` and `Hepatitis` groups.
+                                                                                                  
+# Data processing
+
+The following analysis is based on tidyverse tutorials and examples [here](https://www.tidymodels.org/start/recipes/), [here](https://www.tidymodels.org/start/resampling/) and [here](https://www.tidymodels.org/learn/work/tune-svm/).
+
+## Split
+
+Stratified splitting because target class is imbalanced.
+
+```{r, warning=FALSE, message=FALSE}
+set.seed(124)
+
+data_split <- initial_split(df, prop = 3/4, strata = Diagnosis)
+
+df_train <- training(data_split)
+df_test <- testing(data_split)
+```
+
+## Preprocessing
+
+- Impute using median
+
+- Turn nominal variables into dummies (it is not required by tree-based models or logistic regression, but without this step oversampling step will not work)
+
+- Normalize all predictors
+
+- Balance target classes using SMOTE algorithm
+                                                                                                  
+The preprocessing recipe looks like this:
+
+```{r, warning=FALSE, message=FALSE}
+my_recipe <- recipe(Diagnosis ~ ., data = df_train) %>%
+  step_impute_median(all_numeric_predictors()) %>% # I use median bcz not that many observations are missing
+  step_dummy(all_nominal_predictors()) %>% # dummy goes before normalisation
+  step_normalize(all_predictors()) %>% 
+  step_smote(Diagnosis, over_ratio = 1, seed = 100) %>% # original target distribution 399 v 62
+  check_missing(all_predictors())
+
+my_recipe
+```
+
+```{r, include=FALSE, eval=FALSE, warning=FALSE, message=FALSE}
+# the other way is to apply the recipe to your data immediately
+# prep & bake
+train_data <- my_recipe %>% 
+  prep(training = df_train) %>% 
+  bake(new_data = NULL) # df_train will be processed
+
+# bake test. what about SMOTE?
+test_data <- my_recipe %>% 
+  prep( training = df_test) %>% 
+  bake(new_data = df_test)
+
+# check oversampling results
+train_data %>% count(Diagnosis) # SMOTE was applied
+test_data %>% count(Diagnosis) # not applied
+```
+
+
+# Tune and fit Random Forest models
+
+Stratified, repeated 10-fold cross-validation will be used.
+
+ROC and J-index will be used as maximization metrics.
+
+>If a model is poorly calibrated, the ROC curve value might not show diminished performance. However, the J index would be lower for models with pathological distributions for the class probabilities. 
+
+I will use grid search to tune both RF hyper-parameters: `mtry` and `min_n`
+
+>The `mtry` hyperparameter sets the number of predictor variables that each node in the decision tree “sees” and can learn about, so it can range from 1 to the total number of features present; when `mtry` = all possible features, the model is the same as bagging decision trees. The min_n hyperparameter sets the minimum n to split at any node
+
+```{r, warning=FALSE, message=FALSE}
+set.seed(5732)
+
+# number of cores available on Kaggle
+cores <- 4L 
+
+# model specification
+rf_mod <- 
+  rand_forest(mtry = tune(), min_n = tune(), trees = 1000) %>% 
+  set_engine("ranger", num.threads = cores) %>% 
+  set_mode("classification")
+
+# join model and processing recipe
+rf_cv_wf <- workflow() %>% 
+  add_model(rf_mod) %>% 
+  add_recipe(my_recipe)
+
+# Stratified, repeated 10-fold cross-validation
+cv_folds <- vfold_cv(df_train, strata = "Diagnosis", v = 10, repeats = 5)
+
+# metrics
+cls_metrics <- metric_set(roc_auc, j_index)
+
+# tune models, this takes time
+rf_res <- tune_grid(rf_cv_wf,
+            grid = 25,
+            resamples = cv_folds,
+            control = control_grid(save_pred = TRUE),
+            metrics = cls_metrics)
+
+```
+
+## Tuning results
+
+```{r, warning=FALSE, message=FALSE}
+autoplot(rf_res)
+```
+
+It is better to choose `mtry` and `min_n` corresponding to higher ROC-AUC *and* J-index.
+
+## Choose the best model
+
+5 best models ranked by mean AUC
+
+```{r, warning=FALSE, message=FALSE}
+rf_res %>% 
+  show_best(metric = "roc_auc")
+```
+
+5 best models ranked by J-index
+
+```{r, warning=FALSE, message=FALSE}
+rf_res %>% 
+  show_best(metric = "j_index")
+```
+
+The best hyper-parameters look like this:
+
+```{r, warning=FALSE, message=FALSE}
+rf_best <- rf_res %>% 
+  select_best(metric = "roc_auc")
+
+rf_best
+```
+
+## ROC-AUC of the best model
+
+```{r, warning=FALSE, message=FALSE}
+rf_auc <- rf_res %>% 
+  collect_predictions(parameters = rf_best) %>% 
+  roc_curve(Diagnosis, .pred_Hepatitis) %>% 
+  mutate(model = "Random Forest")
+
+autoplot(rf_auc)
+```
+
+The ROC-curve looks very good: it reaches both Sensitivity/TPR = 1.0 *and* 1-Specificity/FPR = 1.0
+
+# Tune and fit penalized logistic regression
+
+For regularized logistic regression, package [glmnet](https://glmnet.stanford.edu/articles/glmnet.html) will be used.
+
+Recipe for this model is the same as for RF models + removing of correlated variables (correlation threshold = 0.75)
+
+```{r, warning=FALSE, message=FALSE}
+# recipe for LR
+lr_recipe <- recipe(Diagnosis ~ ., data = df_train) %>%
+  step_impute_median(all_numeric_predictors()) %>% # I use median bcz not that many observations are missing
+  step_dummy(all_nominal_predictors()) %>% # dummy goes before normalisation
+  step_normalize(all_predictors()) %>% 
+  step_corr(threshold = 0.75) %>%
+  step_smote(Diagnosis, over_ratio = 1, seed = 100) # original target distribution 399 v 62
+
+# set model type/engine
+lr_mod <- logistic_reg(penalty = tune(), mixture = 1) %>% 
+  set_engine("glmnet")
+
+# define the workflow
+lr_workflow <- 
+  workflow() %>% 
+  add_model(lr_mod) %>% 
+  add_recipe(lr_recipe)
+
+# create a tune grid
+lr_reg_grid <- tibble(penalty = 10**seq(-4, 0, length.out = 30))
+
+# train and tune the model
+lr_res <- tune_grid(lr_workflow,
+              grid = lr_reg_grid,
+              resamples = cv_folds,
+              control = control_grid(save_pred = TRUE),
+              metrics = cls_metrics)
+```
+
+## Tuning results
+
+```{r, warning=FALSE, message=FALSE}
+autoplot(lr_res)
+```
+
+>The lower the penalty, the smaller the number of predictors used by the model. Such models should be preferred.
+
+## Choose the best model
+
+Here you see top 5 best models based on mean AUC and ranked by penalty score
+
+```{r, warning=FALSE, message=FALSE}
+top_models <-
+  lr_res %>% 
+  show_best("roc_auc", n = 5) %>% 
+  arrange(penalty) 
+
+top_models %>% arrange(penalty)
+```
+
+I will choose a model with the highest mean AUC
+
+```{r, warning=FALSE, message=FALSE}
+lr_best <- lr_res %>% 
+  select_best(metric = "roc_auc")
+
+lr_best
+```
+
+## ROC-AUC of the best model
+
+```{r, warning=FALSE, message=FALSE}
+lr_auc <- 
+  lr_res %>% 
+  collect_predictions(parameters = lr_best) %>% 
+  roc_curve(Diagnosis, .pred_Hepatitis) %>% 
+  mutate(model = "Logistic Regression")
+
+autoplot(lr_auc)
+
+```
+
+# Tune and fit Boosted Trees model
+                                                                                                  
+Using the same recipe as for RF
+
+```{r, warning=FALSE, message=FALSE}
+set.seed(732)
+
+# number of cores available on Kaggle
+cores <- 4L 
+
+# model specification
+xgb_mod <- 
+  boost_tree(
+    trees = 50, 
+    mtry = tune(), 
+    min_n = tune(), 
+    tree_depth = tune(), 
+    learn_rate = tune(), 
+    loss_reduction = tune(), 
+    sample_size = tune(), 
+    stop_iter = tune()) %>% 
+  set_engine("xgboost", num.threads = cores) %>% 
+  set_mode("classification")
+
+# join model and processing recipe
+xgb_cv_wf <- workflow() %>% 
+  add_model(xgb_mod) %>% 
+  add_recipe(my_recipe)
+
+# Stratified, repeated 10-fold cross-validation
+cv_folds <- vfold_cv(df_train, strata = "Diagnosis", v = 10, repeats = 5)
+
+# metrics
+cls_metrics <- metric_set(roc_auc, j_index)
+
+# tune models, this takes time
+xgb_res <- tune_grid(xgb_cv_wf,
+            grid = 25,
+            resamples = cv_folds,
+            control = control_grid(save_pred = TRUE),
+            metrics = cls_metrics)
+```
+
+## Tuning results
+
+```{r, fig.width=7, warning=FALSE, message=FALSE}
+autoplot(xgb_res)
+```
+
+## Choose the best model
+
+5 best models ranked by mean AUC
+
+```{r, warning=FALSE, message=FALSE}
+xgb_res %>% 
+  show_best(metric = "roc_auc")
+```
+
+5 best models ranked by mean J-index
+
+```{r, warning=FALSE, message=FALSE}
+xgb_res %>% 
+  show_best(metric = "j_index")
+```
+
+The best hyper-parameters look like this:
+
+```{r, warning=FALSE, message=FALSE}
+xgb_best <- xgb_res %>% 
+  select_best(metric = "roc_auc")
+
+xgb_best
+```
+
+## ROC-AUC of the best model
+
+```{r, warning=FALSE, message=FALSE}
+xgb_auc <- xgb_res %>% 
+  collect_predictions(parameters = xgb_best) %>% 
+  roc_curve(Diagnosis, .pred_Hepatitis) %>% 
+  mutate(model = "Boosted Trees")
+
+autoplot(xgb_auc)
+```
+
+# Compare Logistic Regression, Random Forest and Boosted Trees models
+
+```{r, warning=FALSE, message=FALSE}
+bind_rows(rf_auc, lr_auc, xgb_auc) %>% 
+  ggplot(aes(x = 1 - specificity, y = sensitivity, col = model)) + 
+  geom_path(lwd = 1, alpha = 0.8) +
+  geom_abline(lty = 3) + 
+  coord_equal() + 
+  scale_color_viridis_d(option = "plasma", end = .6)
+
+```
+
+As expected, Boosted Trees (BT) model performs (slightly) better than RF, and both BT and RF perform significantly better than LR.
+
+I choose BT to apply it to the test data set.
+
+# The final fit
+
+Fit the BT model with chosen hyper-parameters to the entire training data set and test it on the test data set
+
+```{r, warning=FALSE, message=FALSE}
+# the last model
+last_xgb_mod <- 
+  boost_tree(trees = 50,
+             mtry = xgb_best$mtry, 
+             min_n = xgb_best$min_n, 
+             tree_depth = xgb_best$tree_depth,
+             learn_rate = xgb_best$learn_rate,
+             loss_reduction = xgb_best$loss_reduction,
+             sample_size = xgb_best$sample_size,
+             stop_iter = xgb_best$stop_iter) %>%
+  set_engine("xgboost", num.threads = cores) %>% 
+  set_mode("classification")
+
+# the last workflow
+last_xgb_wf <- 
+  xgb_cv_wf %>% 
+  update_model(last_xgb_mod)
+
+# the last fit
+set.seed(345)
+last_xgb_fit <- 
+  last_xgb_wf %>% 
+  last_fit(data_split)
+```
+
+
+## Basic performance metrics on the test data set
+
+```{r, warning=FALSE, message=FALSE}
+last_xgb_fit %>% 
+  collect_metrics()
+```
+
+## Variable importance
+
+```{r, warning=FALSE, message=FALSE}
+last_xgb_fit %>% 
+  extract_fit_parsnip() %>% 
+  vip(num_features = 12)
+```
+
+Interestingly, Sex does not play any role in prediction process.                                                                                                  
+                                                                                                  
+## ROC curve on the test data set
+
+```{r, warning=FALSE, message=FALSE}
+last_xgb_fit %>% 
+  collect_predictions() %>% 
+  roc_curve(Diagnosis, .pred_Hepatitis) %>% 
+  autoplot()
+
+```
+
+## Balancing performance by choosing optimal probability cut-off.
+
+I will use j-index (as explained [here](https://probably.tidymodels.org/articles/where-to-use.html)) to balance performance of the model.
+
+>j-index has a maximum value of 1 when there are no false positives and no false negatives. It can be used as justification of whether or not an increase in the threshold value is worth it. If increasing the threshold results in more of an increase in the specificity than a decrease in the sensitivity, we can see that with j-index.
+
+```{r, warning=FALSE, message=FALSE}
+# collect sens, spec, j-index at various cut-offs
+threshold_data <- 
+  last_xgb_fit %>%
+  collect_predictions() %>%
+  threshold_perf(Diagnosis, .pred_Hepatitis, thresholds = seq(0.0, 1, by = 0.05)) %>% 
+  filter(.metric != "distance") %>%
+  mutate(group = case_when(
+    .metric == "sens" | .metric == "spec" ~ "1",
+    TRUE ~ "2"
+  ))
+
+# find max j-index
+max_j_index_threshold <- threshold_data %>%
+  filter(.metric == "j_index") %>%
+  filter(.estimate == max(.estimate)) %>%
+  pull(.threshold)
+
+# plot metrics v cut-offs
+ggplot(threshold_data, aes(x = .threshold, y = .estimate, color = .metric, alpha = group)) +
+  geom_line(size=1) +
+  #theme_minimal() +
+  #scale_color_viridis_d(end = 0.9) +
+  scale_color_brewer(palette = "Set1") +
+  scale_alpha_manual(values = c(.4, 1), guide = "none") +
+  geom_vline(xintercept = max_j_index_threshold, alpha = .8, color = "grey30", linetype = "longdash") +
+  labs(
+    x = "Probability",
+    y = "Metric Estimate",
+    title = "Choosing the optimal probability cut-off"
+  )
+```
+
+j-index is at its maximum at probability cut-off `r max_j_index_threshold`. This value will be chosen for final confusion matrix
+
+## Confusion Matrix
+                                                                                                  
+With probability cut-off `r max_j_index_threshold`                                                                                                  
+
+```{r, warning=FALSE, message=FALSE}
+pred_optimized <- last_xgb_fit %>%
+  collect_predictions() %>% 
+  mutate(
+    .pred = make_two_class_pred(
+      estimate = .pred_Hepatitis, 
+      levels = levels(Diagnosis), 
+      threshold = max_j_index_threshold
+    )
+  ) %>%
+  select(Diagnosis, contains(".pred"))
+
+cm_optimized <- pred_optimized %>% 
+  conf_mat(truth = Diagnosis, estimate = .pred)
+
+autoplot(cm_optimized, type = "heatmap")
+```
+
+## All performance metrics
+
+With probability cut-off `r max_j_index_threshold`
+
+```{r, warning=FALSE, message=FALSE}
+summary(cm_optimized)
+```
+
+## Conclusion
+
+From a clinical perspective, we should be interested both in high sensitivity and specificity, because we do not want to miss any patients with the sickness and at the same time we do not want to raise alarms falsely too many times. The extent to which we can accept lower levels of both metrics varies in each case and should be discussed. Current model performance seems to be sufficiently high and balanced.
+                                                                                                
