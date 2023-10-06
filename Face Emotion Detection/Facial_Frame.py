@@ -114,4 +114,12 @@ camera = VideoCamera('FaceRecon.mp4')
 # Call the 'gen' function to start the facial expression recognition
 gen(camera)
 
-
+# # Write the emotion counts to a file when the code halts
+# try:
+#     with open('emotion_counts.txt', 'w') as file:
+#         for emotion, count in model_path.emotion_counts.items():
+#             file.write(f'{emotion}: {count}\n')
+# except KeyboardInterrupt:
+#     with open('emotion_counts.txt', 'w') as file:
+#         for emotion, count in model_path.emotion_counts.items():
+#             file.write(f'{emotion}: {count}\n')
