@@ -3,7 +3,6 @@ import tensorflow as tf
 import cv2
 import signal
 
-
 class FacialExpressionModel(object):
     EMOTIONS_LIST = ["Angry", "Disgust",
                      "Fear", "Happy",
@@ -50,7 +49,7 @@ class VideoCamera(object):
         self.video = cv2.VideoCapture(path)
         self.frame_count = 0
         self.total_frames = int(self.video.get(cv2.CAP_PROP_FRAME_COUNT))
-        self.threshold_frame = int(self.total_frames * 3 / 4)
+        self.threshold_frame = int(self.total_frames * 15/16)
 
     def __del__(self):
         self.video.release()
@@ -94,12 +93,30 @@ class VideoCamera(object):
 
 
 def gen(camera):
+    # Define a flag to indicate whether the threshold frame is reached
+    threshold_reached = False
+
+    # Initialize variables to keep track of the maximum count emotion and count
+    max_emotion = None
+    max_emotion_count = 0
+    # Loop until the 'q' key is pressed
     while True:
         frame = camera.get_frame()
         cv2.imshow('Facial Expression Reorganization', frame)
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
-    cv2.destroyAllWindows()
+
+        # Check if the threshold frame is reached
+        if not threshold_reached and camera.frame_count >= camera.threshold_frame:
+            threshold_reached = True
+            # Get the emotion with the maximum count
+            for emotion, count in model_path.emotion_counts.items():
+                if count > max_emotion_count:
+                    max_emotion_count = count
+                    max_emotion = emotion
+            # Print the maximum count emotion and its count
+            print(f"Maximum Count Emotion: {max_emotion}")
+            print(f"Count: {max_emotion_count}")
 
 
 def save_emotion_counts():
@@ -109,17 +126,11 @@ def save_emotion_counts():
 
 
 # Create a VideoCamera instance with the path to your video file
-camera = VideoCamera('FaceRecon.mp4')
+camera = VideoCamera('Facial Work2.mp4')
+
 
 # Call the 'gen' function to start the facial expression recognition
 gen(camera)
 
-# # Write the emotion counts to a file when the code halts
-# try:
-#     with open('emotion_counts.txt', 'w') as file:
-#         for emotion, count in model_path.emotion_counts.items():
-#             file.write(f'{emotion}: {count}\n')
-# except KeyboardInterrupt:
-#     with open('emotion_counts.txt', 'w') as file:
-#         for emotion, count in model_path.emotion_counts.items():
-#             file.write(f'{emotion}: {count}\n')
+
+
