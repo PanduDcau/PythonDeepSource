@@ -10,4 +10,4 @@ To run this:
     python live_edge_detector.py
     ```
 - Provide Live Edge Detection
-![]()
+![Edge](https://github.com/PanduDcau/PythonDeepSource/blob/main/Edge%20Detection/Images/Edge%20Detect.png)
