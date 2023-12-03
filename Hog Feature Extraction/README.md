@@ -7,4 +7,4 @@ Input Image:
 ![Cat_Image](https://github.com/PanduDcau/PythonDeepSource/blob/main/Hog%20Feature%20Extraction/Images/cat.jpg)
 
 Apply Hog Feature:
-![Hog]()
+![Hog](https://github.com/PanduDcau/PythonDeepSource/blob/main/Hog%20Feature%20Extraction/Images/hog_image.jpg)
