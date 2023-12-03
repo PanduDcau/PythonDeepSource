@@ -8,3 +8,7 @@ Input Image:
 
 Apply Hog Feature:-
 ![Hog](https://github.com/PanduDcau/PythonDeepSource/blob/main/Hog%20Feature%20Extraction/Images/hog_image.jpg)
+
+Resized Image:-
+- `Providing Image`
+![Hog_resized](https://github.com/PanduDcau/PythonDeepSource/blob/main/Hog%20Feature%20Extraction/Images/hog_image.jpg)
