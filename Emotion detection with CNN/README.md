@@ -16,7 +16,7 @@ https://www.kaggle.com/msambare/fer2013
 ### Train Emotion detector
 With all face expression images in the FER2013 Dataset
 --
-command --> python TranEmotionDetector.py
+> command --> python TranEmotionDetector.py
 
 It will take several hours, depends on your processor. (On i7 processor with 16 GB RAM it took me around 4 hours)
 after Training, you will find the trained model structure and weights are stored in your project directory.
@@ -26,4 +26,4 @@ after Training, you will find the trained model structure and weights are stored
 copy these two files create model folder in your project directory and paste it.
 
 ### run your emotion detection test file
-python TestEmotionDetector.py
+> python TestEmotionDetector.py
