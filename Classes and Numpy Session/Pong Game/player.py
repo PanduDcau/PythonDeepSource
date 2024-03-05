@@ -1,5 +1,6 @@
 import pygame
 
+#Intialization of Player class
 class Player:
 	def __init__(self, x, y, width, height):
 		self.x = x
@@ -7,7 +8,6 @@ class Player:
 		self.rect = pygame.Rect(self.x, self.y, width, height)
 		self.color = pygame.Color("gray")
 		self.player_speed = 16
-	
 		self.score = 0
 
 	def move_up(self):
