@@ -15,7 +15,7 @@ def get_size_format(b, factor=1024, suffix="B"):
         b /= factor
     return f"{b:.2f}Y{suffix}"
     
-
+#Compress images function
 
 def compress_img(image_name, new_size_ratio=0.9, quality=90, width=None, height=None, to_jpg=True):
     # load the image to memory
