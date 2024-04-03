@@ -3,6 +3,8 @@ import numpy as np
 import os
 from datetime import timedelta
 
+# Extracting the libraries
+
 # i.e if video of duration 30 seconds, saves 10 frame per second = 300 frames saved in total
 SAVING_FRAMES_PER_SECOND = 10
 
