@@ -2,6 +2,7 @@ from datetime import timedelta
 import cv2
 import numpy as np
 import os
+#Extracting the frames from the video
 
 # i.e if video of duration 30 seconds, saves 10 frame per second = 300 frames saved in total
 SAVING_FRAMES_PER_SECOND = 10
