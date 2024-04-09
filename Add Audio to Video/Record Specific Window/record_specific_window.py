@@ -8,6 +8,7 @@ import sys
 window_name = sys.argv[1]
 
 # define the codec
+#Videowriter File
 fourcc = cv2.VideoWriter_fourcc(*"XVID")
 # frames per second
 fps = 12.0
