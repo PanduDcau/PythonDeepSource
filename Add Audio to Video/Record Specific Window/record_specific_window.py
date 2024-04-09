@@ -21,6 +21,7 @@ w.activate()
 # create the video write object
 out = cv2.VideoWriter("output.avi", fourcc, fps, tuple(w.size))
 
+#Taking Screenshots with Intervals
 for i in range(int(record_seconds * fps)):
     # make a screenshot
     img = pyautogui.screenshot(region=(w.left, w.top, w.width, w.height))
