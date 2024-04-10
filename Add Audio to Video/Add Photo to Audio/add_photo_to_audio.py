@@ -1,6 +1,6 @@
 from moviepy.editor import AudioFileClip, ImageClip
 
-
+#static Image Work
 def add_static_image_to_audio(image_path, audio_path, output_path):
     """Create and save a video file to `output_path` after 
     combining a static image that is located in `image_path` 
