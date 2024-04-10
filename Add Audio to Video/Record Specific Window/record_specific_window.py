@@ -23,7 +23,7 @@ out = cv2.VideoWriter("output.avi", fourcc, fps, tuple(w.size))
 
 #Taking Screenshots with Intervals
 for i in range(int(record_seconds * fps)):
-    # make a screenshot
+    # Taking a Screenshots
     img = pyautogui.screenshot(region=(w.left, w.top, w.width, w.height))
     # convert these pixels to a proper numpy array to work with OpenCV
     frame = np.array(img)
