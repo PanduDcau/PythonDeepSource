@@ -1,4 +1,4 @@
-# [How to Reverse Videos in Python](https://www.thepythoncode.com/article/reverse-video-in-python)
+# [How to Reverse Video clip in Python](https://www.thepythoncode.com/article/reverse-video-in-python)
 To run this:
 - `pip3 install -r requirements.txt`
 - 
