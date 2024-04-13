@@ -1,4 +1,5 @@
 import wave
+#Import files for the wave files extraction
 
 def concatenate_audio_wave(audio_clip_paths, output_path):
     """Concatenates several audio files into one audio file using Python's built-in wav module
