@@ -1,5 +1,5 @@
 from moviepy.editor import concatenate_videoclips, VideoFileClip
-
+#moviepy editor files importing
 
 def concatenate(video_clip_paths, output_path, method="compose"):
     """Concatenates several video files into one video file
