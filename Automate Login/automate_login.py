@@ -8,7 +8,6 @@ from selenium.webdriver.support.ui import WebDriverWait
 username = "username"
 password = "password"
 
-
 # initialize the Chrome driver
 driver = webdriver.Chrome(r"chromedriver")
 # head to github login page
