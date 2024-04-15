@@ -4,9 +4,10 @@ from selenium.webdriver.support.ui import WebDriverWait
 
 #Login Automation Testing with Selenium
 
-# Github credentials
+# Github credentials of the user
 username = "username"
 password = "password"
+
 
 # initialize the Chrome driver
 driver = webdriver.Chrome(r"chromedriver")
