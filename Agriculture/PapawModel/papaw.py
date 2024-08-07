@@ -10,7 +10,7 @@ random_id = str(random.randint(100, 999))
 image_name = f"predictions_{random_id}.jpg"
 
 
-rf = Roboflow(api_key="zpJpqip0iN5TpMWJPaM2")
+rf = Roboflow(api_key="ppa")
 project = rf.workspace().project("pepper-segmentation")
 model = project.version(1).model
 
