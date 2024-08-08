@@ -1,0 +1,241 @@
+Travel Type,Travel Time Period,Travel Duration (Weeks),Package Type
+Adventure ,jan-march,1,1
+Adventure ,jan-march,2,1
+Adventure ,jan-march,3,1
+Adventure ,jan-march,4,1
+Adventure ,jan-march,5,1
+Adventure ,jan-march,6,1
+Adventure ,jan-march,7,1
+Adventure ,jan-march,8,1
+Adventure ,jan-march,9,1
+Adventure ,jan-march,10,1
+Adventure ,jan-march,11,1
+Adventure ,jan-march,12,1
+Adventure ,april-june,1,1
+Adventure ,april-june,2,1
+Adventure ,april-june,3,1
+Adventure ,april-june,4,1
+Adventure ,april-june,5,1
+Adventure ,april-june,6,1
+Adventure ,april-june,7,1
+Adventure ,april-june,8,1
+Adventure ,april-june,9,1
+Adventure ,april-june,10,1
+Adventure ,april-june,11,1
+Adventure ,april-june,12,1
+Adventure ,july-sep,1,1
+Adventure ,july-sep,2,1
+Adventure ,july-sep,3,1
+Adventure ,july-sep,4,1
+Adventure ,july-sep,5,1
+Adventure ,july-sep,6,1
+Adventure ,july-sep,7,1
+Adventure ,july-sep,8,1
+Adventure ,july-sep,9,1
+Adventure ,july-sep,10,1
+Adventure ,july-sep,11,1
+Adventure ,july-sep,12,1
+Adventure ,oct-dec,1,1
+Adventure ,oct-dec,2,1
+Adventure ,oct-dec,3,1
+Adventure ,oct-dec,4,1
+Adventure ,oct-dec,5,1
+Adventure ,oct-dec,6,1
+Adventure ,oct-dec,7,1
+Adventure ,oct-dec,8,1
+Adventure ,oct-dec,9,1
+Adventure ,oct-dec,10,1
+Adventure ,oct-dec,11,1
+Adventure ,oct-dec,12,1
+Hiking,jan-march,1,2
+Hiking,jan-march,2,2
+Hiking,jan-march,3,2
+Hiking,jan-march,4,2
+Hiking,jan-march,5,2
+Hiking,jan-march,6,2
+Hiking,jan-march,7,2
+Hiking,jan-march,8,2
+Hiking,jan-march,9,2
+Hiking,jan-march,10,2
+Hiking,jan-march,11,2
+Hiking,jan-march,12,2
+Hiking,april-june,1,2
+Hiking,april-june,2,2
+Hiking,april-june,3,2
+Hiking,april-june,4,2
+Hiking,april-june,5,2
+Hiking,april-june,6,2
+Hiking,april-june,7,2
+Hiking,april-june,8,2
+Hiking,april-june,9,2
+Hiking,april-june,10,2
+Hiking,april-june,11,2
+Hiking,april-june,12,2
+Hiking,july-sep,1,2
+Hiking,july-sep,2,2
+Hiking,july-sep,3,2
+Hiking,july-sep,4,2
+Hiking,july-sep,5,2
+Hiking,july-sep,6,2
+Hiking,july-sep,7,2
+Hiking,july-sep,8,2
+Hiking,july-sep,9,2
+Hiking,july-sep,10,2
+Hiking,july-sep,11,2
+Hiking,july-sep,12,2
+Hiking,oct-dec,1,2
+Hiking,oct-dec,2,2
+Hiking,oct-dec,3,2
+Hiking,oct-dec,4,2
+Hiking,oct-dec,5,2
+Hiking,oct-dec,6,2
+Hiking,oct-dec,7,2
+Hiking,oct-dec,8,2
+Hiking,oct-dec,9,2
+Hiking,oct-dec,10,2
+Hiking,oct-dec,11,2
+Hiking,oct-dec,12,2
+Nature walk,jan-march,1,3
+Nature walk,jan-march,2,3
+Nature walk,jan-march,3,3
+Nature walk,jan-march,4,3
+Nature walk,jan-march,5,3
+Nature walk,jan-march,6,3
+Nature walk,jan-march,7,3
+Nature walk,jan-march,8,3
+Nature walk,jan-march,9,3
+Nature walk,jan-march,10,3
+Nature walk,jan-march,11,3
+Nature walk,jan-march,12,3
+Nature walk,april-june,1,3
+Nature walk,april-june,2,3
+Nature walk,april-june,3,3
+Nature walk,april-june,4,3
+Nature walk,april-june,5,3
+Nature walk,april-june,6,3
+Nature walk,april-june,7,3
+Nature walk,april-june,8,3
+Nature walk,april-june,9,3
+Nature walk,april-june,10,3
+Nature walk,april-june,11,3
+Nature walk,april-june,12,3
+Nature walk,july-sep,1,3
+Nature walk,july-sep,2,3
+Nature walk,july-sep,3,3
+Nature walk,july-sep,4,3
+Nature walk,july-sep,5,3
+Nature walk,july-sep,6,3
+Nature walk,july-sep,7,3
+Nature walk,july-sep,8,3
+Nature walk,july-sep,9,3
+Nature walk,july-sep,10,3
+Nature walk,july-sep,11,3
+Nature walk,july-sep,12,3
+Nature walk,oct-dec,1,3
+Nature walk,oct-dec,2,3
+Nature walk,oct-dec,3,3
+Nature walk,oct-dec,4,3
+Nature walk,oct-dec,5,3
+Nature walk,oct-dec,6,3
+Nature walk,oct-dec,7,3
+Nature walk,oct-dec,8,3
+Nature walk,oct-dec,9,3
+Nature walk,oct-dec,10,3
+Nature walk,oct-dec,11,3
+Nature walk,oct-dec,12,3
+Beach,jan-march,1,4
+Beach,jan-march,2,4
+Beach,jan-march,3,4
+Beach,jan-march,4,4
+Beach,jan-march,5,4
+Beach,jan-march,6,4
+Beach,jan-march,7,4
+Beach,jan-march,8,4
+Beach,jan-march,9,4
+Beach,jan-march,10,4
+Beach,jan-march,11,4
+Beach,jan-march,12,4
+Beach,april-june,1,4
+Beach,april-june,2,4
+Beach,april-june,3,4
+Beach,april-june,4,4
+Beach,april-june,5,4
+Beach,april-june,6,4
+Beach,april-june,7,4
+Beach,april-june,8,4
+Beach,april-june,9,4
+Beach,april-june,10,4
+Beach,april-june,11,4
+Beach,april-june,12,4
+Beach,july-sep,1,4
+Beach,july-sep,2,4
+Beach,july-sep,3,4
+Beach,july-sep,4,4
+Beach,july-sep,5,4
+Beach,july-sep,6,4
+Beach,july-sep,7,4
+Beach,july-sep,8,4
+Beach,july-sep,9,4
+Beach,july-sep,10,4
+Beach,july-sep,11,4
+Beach,july-sep,12,4
+Beach,oct-dec,1,4
+Beach,oct-dec,2,4
+Beach,oct-dec,3,4
+Beach,oct-dec,4,4
+Beach,oct-dec,5,4
+Beach,oct-dec,6,4
+Beach,oct-dec,7,4
+Beach,oct-dec,8,4
+Beach,oct-dec,9,4
+Beach,oct-dec,10,4
+Beach,oct-dec,11,4
+Beach,oct-dec,12,4
+Relax,jan-march,1,5
+Relax,jan-march,2,5
+Relax,jan-march,3,5
+Relax,jan-march,4,5
+Relax,jan-march,5,5
+Relax,jan-march,6,5
+Relax,jan-march,7,5
+Relax,jan-march,8,5
+Relax,jan-march,9,5
+Relax,jan-march,10,5
+Relax,jan-march,11,5
+Relax,jan-march,12,5
+Relax,april-june,1,5
+Relax,april-june,2,5
+Relax,april-june,3,5
+Relax,april-june,4,5
+Relax,april-june,5,5
+Relax,april-june,6,5
+Relax,april-june,7,5
+Relax,april-june,8,5
+Relax,april-june,9,5
+Relax,april-june,10,5
+Relax,april-june,11,5
+Relax,april-june,12,5
+Relax,july-sep,1,5
+Relax,july-sep,2,5
+Relax,july-sep,3,5
+Relax,july-sep,4,5
+Relax,july-sep,5,5
+Relax,july-sep,6,5
+Relax,july-sep,7,5
+Relax,july-sep,8,5
+Relax,july-sep,9,5
+Relax,july-sep,10,5
+Relax,july-sep,11,5
+Relax,july-sep,12,5
+Relax,oct-dec,1,5
+Relax,oct-dec,2,5
+Relax,oct-dec,3,5
+Relax,oct-dec,4,5
+Relax,oct-dec,5,5
+Relax,oct-dec,6,5
+Relax,oct-dec,7,5
+Relax,oct-dec,8,5
+Relax,oct-dec,9,5
+Relax,oct-dec,10,5
+Relax,oct-dec,11,5
+Relax,oct-dec,12,5
