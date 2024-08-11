@@ -12,6 +12,7 @@ image_name = f"predictions_{random_id}.jpg"
 
 
 rf = Roboflow(api_key="ppa")
+#Api should be added in here
 project = rf.workspace().project("pepper-segmentation")
 model = project.version(1).model
 
