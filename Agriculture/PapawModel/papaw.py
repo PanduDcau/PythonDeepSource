@@ -4,7 +4,7 @@ import uuid
 #import Uuid for random number generate
 
 import random
-# Generate a random three-digit number
+# Generate a random three-digit number in the application
 random_id = str(random.randint(100, 999))
 
 # Use the random number as the image name prefix
