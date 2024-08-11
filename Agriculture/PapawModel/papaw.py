@@ -1,6 +1,7 @@
 from roboflow import Roboflow
 import cv2
 import uuid
+#import Uuid for random number generate
 
 import random
 # Generate a random three-digit number
