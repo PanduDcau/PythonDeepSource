@@ -2,7 +2,7 @@ from logging import error
 from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
 
-#Login Automation Testing with Selenium
+#Login Automation Testing with Selenium Work
 
 # Github credentials of the user
 username = "username"
