@@ -1,3 +1,4 @@
+##!pip install pptx
 import pptx
 from pptx.util import Inches, Pt
 from pptx.enum.text import PP_ALIGN
