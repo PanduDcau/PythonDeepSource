@@ -1,0 +1,6 @@
+Model,Significance,Key Features
+AlexNet,First CNN to demonstrate large-scale success in image classification.,"ReLU activation, dropout, overlapping pooling, 5 conv + 3 fully connected layers."
+FFNN,Baseline for comparing manually extracted features with automated deep learning features.,"Fully connected layers, simple structure, processes flattened image data."
+InceptionV3,Efficient multi-scale feature extraction for complex datasets.,"Inception modules, auxiliary classifiers, factorized convolutions."
+ResNet50,Deep architecture with residual connections for gradient stability.,"Residual blocks, batch normalization, 50 layers deep."
+VGG19,Consistent deep architecture for high accuracy in structured datasets.,"Small 3x3 filters, sequential layers, powerful feature extraction, pre-trained weights for transfer learning."
