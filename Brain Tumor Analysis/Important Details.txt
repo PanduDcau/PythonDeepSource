@@ -1,0 +1,2 @@
+https://www.kaggle.com/code/ruslankl/brain-tumor-detection-v1-0-cnn-vgg-16/notebook
+https://www.kaggle.com/code/abdallahwagih/brain-tumor-segmentation-unet-efficientnetb7/notebook
